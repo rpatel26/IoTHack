@@ -5,8 +5,8 @@ import time
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)                    # programming the GPIO by BCM pin numbers
 
-TRIG = 17
-ECHO = 27
+TRIG = 23
+ECHO = 24
 led = 22
 
 m11=16
@@ -28,39 +28,39 @@ GPIO.output(led, 1)
 time.sleep(5)
 
 def stop():
-    print "stop"
     GPIO.output(m11, 0)
     GPIO.output(m12, 0)
     GPIO.output(m21, 0)
     GPIO.output(m22, 0)
+    print("stop")
 
 def forward():
     GPIO.output(m11, 1)
     GPIO.output(m12, 0)
     GPIO.output(m21, 1)
     GPIO.output(m22, 0)
-    print "Forward"
+    print("Forward")
 
 def back():
     GPIO.output(m11, 0)
     GPIO.output(m12, 1)
     GPIO.output(m21, 0)
     GPIO.output(m22, 1)
-    print "back"
+    print("back")
 
 def left():
     GPIO.output(m11, 0)
     GPIO.output(m12, 0)
     GPIO.output(m21, 1)
     GPIO.output(m22, 0)
-    print "left"
+    print("left")
 
 def right():
     GPIO.output(m11, 1)
     GPIO.output(m12, 0)
     GPIO.output(m21, 0)
     GPIO.output(m22, 0)
-    print "right"
+    print("right")
 
 stop()
 count=0
@@ -89,7 +89,7 @@ while True:
   avgDistance=avgDistance+distance
 
  avgDistance=avgDistance/5
- print avgDistance
+ print(avgDistance)
  flag=0
  if avgDistance < 15:      #Check whether the distance is within 15 cm range
     count=count+1

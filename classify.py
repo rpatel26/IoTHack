@@ -61,63 +61,18 @@ prediction = model.add(Dense(num_classes, activation = 'softmax'))
 model.summary()
 
 model.load_weights(LOAD_PATH)
- 
-image = cv2.imread(IMG_SRC)
+
+def classify_data(data):
+	image = cv2.resize(data, (DEFAULT_WIDTH,DEFAULT_HEIGHT))
+	image = np.expand_dims(image, axis = 0)
             
-#if image is None:
-    # print("Image is of type None")
-    #continue
+	predicted_values = model.predict(image) # sum of every element adds up to 1
+	result = classes[np.argmax(predicted_values, axis = 1)[0] + 1]
     
-#print("File detected!!")
-#print(file_list)
-        
-image = cv2.resize(image, (DEFAULT_WIDTH,DEFAULT_HEIGHT))
-image = np.expand_dims(image, axis = 0)
-            
-predicted_values = model.predict(image) # sum of every element adds up to 1
-result = classes[np.argmax(predicted_values, axis = 1)[0] + 1]
-    
-print("result = ",result)
-print("predicted values = ", predicted_values)
+	print("result = ",result)
+	print("predicted values = ", predicted_values)
 
 '''
-while True:
-    cpt = sum([len(files) for r, d, files in os.walk(IMG_SRC_DIR)])
-    if(cpt == 1):
-        file_list = glob.glob(os.path.join(IMG_SRC_DIR,'*'))
-        
-        image = cv2.imread(file_list[0])
-            
-        if image is None:
-            # print("Image is of type None")
-            continue
-    
-        print("File detected!!")
-        print(file_list)
-        
-        image = cv2.resize(image, (DEFAULT_WIDTH,DEFAULT_HEIGHT))
-        image = np.expand_dims(image, axis = 0)
-            
-        predicted_values = model.predict(image) # sum of every element adds up to 1
-        result = classes[np.argmax(predicted_values, axis = 1)[0] + 1]
-    
-        print("result = ",result)
-        print("count = ", count)
-        fp = open(RESULT_DEST_DIR, "w")
-    
-        fp.write("Result: ")
-        fp.write(result)
-        fp.write("\n")
-
-    
-        fp.write(str(count))
-        fp.write("\n")
-    
-    
-        fp.close()
-        count = count + 1
-    
-        #time.sleep(5)
-        os.remove(file_list[0])
-# os.remove(RESULT_DEST_DIR)
+image = cv2.imread(IMG_SRC)
+classify_data(image)
 '''

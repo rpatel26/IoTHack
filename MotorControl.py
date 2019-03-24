@@ -33,7 +33,7 @@ class MotorControl:
 		self.p2.start(25)
 
 		self.p1.ChangeDutyCycle(75)
-		self.p2.ChangeDutyCycle(75)
+		self.p2.ChangeDutyCycle(40)
 
 
 	def forward(self):
@@ -53,6 +53,8 @@ class MotorControl:
 
 	def turn_right(self):
 		print("turn right")
+		self.p2.ChangeDutyCycle(25)
+
 		GPIO.output(self.in1, GPIO.LOW)
 		GPIO.output(self.in2, GPIO.LOW)
 		GPIO.output(self.in3, GPIO.HIGH)
@@ -72,15 +74,3 @@ class MotorControl:
 		GPIO.output(self.in3, GPIO.LOW)
 		GPIO.output(self.in4, GPIO.LOW)
 
-
-mc = MotorControl()
-
-while(1):
-	mc.turn_left()
-	sleep(2)
-	mc.turn_right()
-	sleep(2)
-	mc.forward()
-	sleep(2)
-	mc.backward()
-	sleep(2)
