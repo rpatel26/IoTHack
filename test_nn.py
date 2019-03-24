@@ -200,21 +200,29 @@ x_shape = [DEFAULT_WIDTH,DEFAULT_HEIGHT,3]
 model = Sequential()
 model.add(Conv2D(32, (3,3), input_shape = x_shape, activation = 'relu'))
 model.add(MaxPooling2D(pool_size = (2,2)))
+model.add(BatchNormalization())
+model.add(Dropout(0.3))
 
 model.add(Conv2D(16, (3,3), activation = 'relu'))
 model.add(MaxPooling2D(pool_size = (2,2)))
+model.add(BatchNormalization())
+model.add(Dropout(0.3))
+
+model.add(Conv2D(8, (3,3), activation = 'relu'))
+model.add(MaxPooling2D(pool_size = (2,2)))
+model.add(BatchNormalization())
 
 model.add(Flatten())
 model.add(Dense(32, activation = 'relu'))
 model.add(Dropout(0.5))
-	
+
 prediction = model.add(Dense(num_classes, activation = 'softmax'))
 
 model.summary()
 
-batch_size = 128 
+batch_size = 256
 max_epoches = 250 
-learning_rate = 0.001 
+learning_rate = 0.01 
 outFile = "personal_train.h5"
 
 model = train(model, x_train, y_train, x_test, y_test, num_classes,
