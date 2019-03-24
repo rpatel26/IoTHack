@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 from time import sleep
 
 class MotorControl:
-	def __init__(self, in1 = 23, in2 = 24, in3 = 18, in4 = 16, en1 = 25, en2 = 12):
+	def __init__(self, in1 = 16, in2 = 12, in3 = 19, in4 = 20, en1 = 26, en2 = 21):
 		print("initializing motor control")
 		self.in1 = in1
 		self.in2 = in2
@@ -79,4 +79,8 @@ while(1):
 	mc.turn_left()
 	sleep(2)
 	mc.turn_right()
+	sleep(2)
+	mc.forward()
+	sleep(2)
+	mc.backward()
 	sleep(2)
